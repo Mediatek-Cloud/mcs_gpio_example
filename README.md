@@ -6,7 +6,7 @@
 
 * Copy the folder `project/mt7687_hdk/apps/mcs_gpio` to your SDK directory `{SDK_Root}/config/project/mt7687_hdk/mcs_gpio`
 
-* To build the code, run the command on your SDK_Root : `./build.sh mt7687_hdk iot_sdk`
+* To build the code, run the command on your SDK_Root : `./build.sh mt7687_hdk mcs_gpio`
 
 * Burn the generated .bin file to your 7687 device.
 
