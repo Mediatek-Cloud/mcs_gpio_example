@@ -60,7 +60,7 @@
 #define LWIP_HAVE_LOOPIF                1
 #define LWIP_IGMP                       1
 #define LWIP_NETIF_HOSTNAME             1
-#define LWIP_DHCP_AUTOIP_COOP		1
+#define LWIP_DHCP_AUTOIP_COOP       1
 #define LWIP_DHCP_AUTOIP_COOP_TRIES     3
 
 /* TODO*/
@@ -133,7 +133,7 @@ a lot of data that needs to be copied, this should be set high. */
 #define MEMP_NUM_TCP_PCB        32   //8 original
 /* MEMP_NUM_TCP_PCB_LISTEN: the number of listening TCP
    connections. */
-#define MEMP_NUM_TCP_PCB_LISTEN 32 	//16 original
+#define MEMP_NUM_TCP_PCB_LISTEN 32  //16 original
 /* MEMP_NUM_TCP_SEG: the number of simultaneously queued TCP
    segments. */
 #define MEMP_NUM_TCP_SEG        255

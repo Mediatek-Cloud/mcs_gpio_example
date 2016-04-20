@@ -131,18 +131,18 @@
  ****************************************************************************/
 
 
-static uint8_t _sdk_cli_mem   (uint8_t len, char *param[]);
+static uint8_t _sdk_cli_mem(uint8_t len, char *param[]);
 static uint8_t _sdk_cli_reboot(uint8_t len, char *param[]);
-static uint8_t _sdk_cli_ver   (uint8_t len, char *param[]);
+static uint8_t _sdk_cli_ver(uint8_t len, char *param[]);
 
 
-static uint8_t _cli_reg_r     (uint8_t len, char *param[]);
-static uint8_t _cli_reg_w     (uint8_t len, char *param[]);
+static uint8_t _cli_reg_r(uint8_t len, char *param[]);
+static uint8_t _cli_reg_w(uint8_t len, char *param[]);
 
 #if (CACHE_API_TEST_CLI == 1)
-static uint8_t _cli_cache_set (uint8_t len, char *param[]);
-static uint8_t _cli_cache_hit (uint8_t len, char *param[]);
-static uint8_t _cli_cache_clr (uint8_t len, char *param[]);
+static uint8_t _cli_cache_set(uint8_t len, char *param[]);
+static uint8_t _cli_cache_hit(uint8_t len, char *param[]);
+static uint8_t _cli_cache_clr(uint8_t len, char *param[]);
 #endif
 
 static uint8_t _cli_show_lwip_stat(uint8_t len, char *param[]);
@@ -370,7 +370,7 @@ static uint8_t _sdk_cli_reboot(uint8_t len, char *param[])
 
 
 #if (CACHE_API_TEST_CLI == 1)
-static uint8_t _cli_cache_set (uint8_t len, char *param[])
+static uint8_t _cli_cache_set(uint8_t len, char *param[])
 {
     uint8_t  type;
     uint32_t value;
@@ -407,14 +407,14 @@ static uint8_t _cli_cache_set (uint8_t len, char *param[])
     return 0;
 }
 
-static uint8_t _cli_cache_hit (uint8_t len, char *param[])
+static uint8_t _cli_cache_hit(uint8_t len, char *param[])
 {
     printf("cache hit rate: %u\n", (unsigned int)hal_cache_get_hit_rate());
 
     return 0;
 }
 
-static uint8_t _cli_cache_clr (uint8_t len, char *param[])
+static uint8_t _cli_cache_clr(uint8_t len, char *param[])
 {
     if (hal_cache_clear_count() < 0) {
         printf("clear cache hit count failed\n");

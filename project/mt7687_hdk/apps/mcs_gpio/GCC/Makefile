@@ -59,7 +59,7 @@ FLOAT_TYPE      = hard
 BUILD_DIR       = $(PWD)/Build
 
 # Project name
-PROJ_NAME       = mt7687_mcs_gpio
+PROJ_NAME       = mcs_gpio
 PROJ_PATH       = $(PWD)
 OUTPATH         = $(PWD)/Build
 
@@ -120,7 +120,7 @@ CXX_OBJS        = $(CXX_FILES:%.cpp=$(BUILD_DIR)/%.o)
 ##############################################################################
 
 
-CFLAGS += -DMTK_FW_VERSION=\"$(MTK_FW_VERSION)-$(DATIME)\"
+CFLAGS += -DMTK_FW_VERSION=\"$(MTK_FW_VERSION)\"
 CFLAGS += -I$(SOURCE_DIR)/$(APP_PATH)/inc
 CFLAGS += -I$(SOURCE_DIR)/driver/chip/mt7687/inc
 CFLAGS += -I$(SOURCE_DIR)/driver/chip/inc
@@ -159,7 +159,7 @@ endif
 
 
 ifeq ($(MTK_HOMEKIT_ENABLE),y)
-LIBS += $(OUTPATH)/libhomekit.a
+LIBS += $(SOURCE_DIR)/middleware/MTK/homekit/lib/libhomekit.a
 LIBS += $(OUTPATH)/libjsonc.a
 LIBS += $(OUTPATH)/libed25519.a
 LIBS += $(OUTPATH)/libchacha20poly1305.a
@@ -171,11 +171,11 @@ LIBS += $(OUTPATH)/libfota.a
 LIBS += $(OUTPATH)/libtftp.a
 LIBS += $(OUTPATH)/libhttpclient.a
 LIBS += $(OUTPATH)/libmbedtls.a
-LIBS += $(OUTPATH)/libminicli.a
+LIBS += $(SOURCE_DIR)/middleware/MTK/minicli/lib/libminicli.a
 ifeq ($(MTK_WIFI_WPS_ENABLE),y)
-LIBS += $(OUTPATH)/libminisupp_wps.a
+LIBS += $(SOURCE_DIR)/middleware/MTK/minisupp/lib/libminisupp_wps.a
 else
-LIBS += $(OUTPATH)/libminisupp.a
+LIBS += $(SOURCE_DIR)/middleware/MTK/minisupp/lib/libminisupp.a
 endif
 LIBS += $(OUTPATH)/libmqtt.a
 LIBS += $(OUTPATH)/libnghttp2.a
@@ -191,9 +191,9 @@ LIBS += $(OUTPATH)/libiperf.a
 LIBS += $(OUTPATH)/librtos.a
 LIBS += $(OUTPATH)/libbspex.a
 LIBS += $(OUTPATH)/libbsp.a
-LIBS += $(OUTPATH)/libbsp_sec.a
+LIBS += $(SOURCE_DIR)/driver/board/mt76x7_hdk/lib/libbsp_sec.a
 LIBS += $(OUTPATH)/libsmtcn.a
-LIBS += $(OUTPATH)/libsmtcn_core.a
+LIBS += $(SOURCE_DIR)/middleware/MTK/smtcn/lib/libsmtcn_core.a
 LIBS += $(OUTPATH)/libservice.a
 LIBS += $(OUTPATH)/libping.a
 LIBS += $(OUTPATH)/liblwip.a
@@ -233,8 +233,6 @@ libs:
 	$(Q)make -C $(MID_DHCPD_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(MID_HTTPCLIENT_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(MID_MBEDTLS_PATH) $(MOD_EXTRA)
-	$(Q)make -C $(MID_MINICLI_PATH) $(MOD_EXTRA)
-	$(Q)make -C $(MID_MINISUPP_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(MID_MQTT_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(MID_NGHTTP2_PATH) $(MOD_EXTRA)
 ifeq ($(MTK_NVRAM_ENABLE),y)
@@ -244,19 +242,16 @@ ifeq ($(MTK_NVDM_ENABLE),y)
 	$(Q)make -C $(MID_NVDM_PATH) $(MOD_EXTRA)
 endif
 	$(Q)make -C $(MID_SMTCN_PATH) $(MOD_EXTRA)
-	$(Q)make -C $(MID_SMTCN_CORE_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(MID_SNTP_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(MID_XML_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(MID_BSPEXT_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(DRV_CHIP_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(KRL_SRV_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(DRV_BSP_PATH) $(MOD_EXTRA)
-	$(Q)make -C $(DRV_BSP_SEC_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(MID_PING_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(MID_IPERF_PATH) $(MOD_EXTRA)
 	$(Q)make -C $(MID_FOTA_PATH) $(MOD_EXTRA)
 ifeq ($(MTK_HOMEKIT_ENABLE),y)
-	$(Q)make -C $(MID_HOMEKIT_PATH)  $(MOD_EXTRA)
 	$(Q)make -C $(MID_CURVE25519_PATH)  $(MOD_EXTRA)
 	$(Q)make -C $(MID_JSONC_PATH)  $(MOD_EXTRA)
 	$(Q)make -C $(MID_ED25519_PATH)  $(MOD_EXTRA)

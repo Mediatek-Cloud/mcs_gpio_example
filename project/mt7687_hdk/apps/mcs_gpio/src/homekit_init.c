@@ -115,7 +115,7 @@ void dhcp_network_changed_task(void *p)
         }
         /*
         else{
-        	printf("ERROR: mdnsd has not been started yet\n");
+            printf("ERROR: mdnsd has not been started yet\n");
         }
         */
     } else if (evt == WIFI_EVENT_IOT_CONNECTED && dhcp->autoip_coop_state == DHCP_AUTOIP_COOP_STATE_OFF /*&& dhcp->pcb == NULL*/) {
@@ -200,7 +200,7 @@ void dhcp_network_changed_task(void *p)
         }
 ////////////////////////////////////////////////////
     } else {
-        printf("Event %d and coop state %d  Not Handled by dhcp_network_changed_event_handler\n", evt, dhcp->autoip_coop_state );
+        printf("Event %d and coop state %d  Not Handled by dhcp_network_changed_event_handler\n", evt, dhcp->autoip_coop_state);
     }
 
 exit:
@@ -226,8 +226,8 @@ void homekit_mdnsd_task_stop(void)
 
 int homekit_mdnsd_task_start(size_t stack_size)
 {
-    if (xTaskCreate( homekit_mdnsd_task, "mdnsd", stack_size * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
-                     &mDNSTaskHandler) != pdPASS) {
+    if (xTaskCreate(homekit_mdnsd_task, "mdnsd", stack_size * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
+                    &mDNSTaskHandler) != pdPASS) {
         printf("Failed to create mdnsd task...\n");
         return pdFAIL;
     }
@@ -236,8 +236,8 @@ int homekit_mdnsd_task_start(size_t stack_size)
 
 int homekit_wac_reset(void)
 {
-    if (xTaskCreate( wacserver_reset_task, "wac3", 2 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
-                     NULL) != pdPASS) {
+    if (xTaskCreate(wacserver_reset_task, "wac3", 2 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
+                    NULL) != pdPASS) {
         printf("Failed to create WACServer task...\n");
         return pdFAIL;
     }
@@ -278,8 +278,8 @@ void homekit_task(void *args)
         printf("homekit mdnsd start...\n");
 #if 0
         // mDNS start
-        if (xTaskCreate( homekit_mdnsd_task, "mdnsd", 15 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
-                         &mDNSTaskHandler) != pdPASS) {
+        if (xTaskCreate(homekit_mdnsd_task, "mdnsd", 15 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
+                        &mDNSTaskHandler) != pdPASS) {
             printf("Failed to create mdnsd task...\n");
             goto exit;
         }
@@ -295,19 +295,19 @@ void homekit_task(void *args)
         QueueHandle_t wac_status_queue;
         int wac_status = -2; //default status - timeout
 
-        wac_status_queue = xQueueCreate( 1, sizeof( int ) );
-        if ( wac_status_queue == 0 ) {
+        wac_status_queue = xQueueCreate(1, sizeof(int));
+        if (wac_status_queue == 0) {
             printf("Failed to create wac_status Queue...\n");
         }
 
         while (wac_status != 1) {
-            if (xTaskCreate( wacserver_start_task, "wac1", 1 * 1024 / sizeof(portSTACK_TYPE), &wac_status_queue, 1, \
-                             &wac_task) != pdPASS) {
+            if (xTaskCreate(wacserver_start_task, "wac1", 1 * 1024 / sizeof(portSTACK_TYPE), &wac_status_queue, 1, \
+                            &wac_task) != pdPASS) {
                 printf("Failed to create WACServer task...\n");
                 goto exit;
             }
 
-            if (xQueueReceive( wac_status_queue, &( wac_status ), 60 * 60 * 1000 / portTICK_PERIOD_MS) != pdTRUE) {
+            if (xQueueReceive(wac_status_queue, &(wac_status), 60 * 60 * 1000 / portTICK_PERIOD_MS) != pdTRUE) {
                 printf("Timeout to communicate with WAC task...\n");
             }
 
@@ -342,13 +342,13 @@ void homekit_task(void *args)
             }
         }
 
-        vQueueDelete( wac_status_queue );
+        vQueueDelete(wac_status_queue);
         wac_status_queue = NULL;
 
         printf("homekit hap start...\n");
         // HAP start
-        if (xTaskCreate( hap_test, "hap", 5 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
-                         &hap_task) != pdPASS) {
+        if (xTaskCreate(hap_test, "hap", 5 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
+                        &hap_task) != pdPASS) {
             printf("Failed to create HAP task...\n");
             goto exit;
         }
@@ -381,8 +381,8 @@ void homekit_task(void *args)
         printf("homekit mdnsd start...\n");
 #if 0
         // mDNS start
-        if (xTaskCreate( homekit_mdnsd_task, "mdnsd", 10 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
-                         &mDNSTaskHandler) != pdPASS) {
+        if (xTaskCreate(homekit_mdnsd_task, "mdnsd", 10 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
+                        &mDNSTaskHandler) != pdPASS) {
             printf("Failed to create mdnsd task...\n");
             goto exit;
         }
@@ -394,16 +394,16 @@ void homekit_task(void *args)
         printf("homekit hap start...\n");
         vTaskDelay(delay * 1000 / portTICK_PERIOD_MS);
         // HAP start
-        if (xTaskCreate( hap_test, "hap", 5 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
-                         &hap_task) != pdPASS) {
+        if (xTaskCreate(hap_test, "hap", 5 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
+                        &hap_task) != pdPASS) {
             printf("Failed to create HAP task...\n");
             goto exit;
         }
     } else {
         // HAP reset
         printf("homekit hap reset...\n");
-        if (xTaskCreate( hap_reset, "hap", 5 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
-                         &hap_task) != pdPASS) {
+        if (xTaskCreate(hap_reset, "hap", 5 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, \
+                        &hap_task) != pdPASS) {
             printf("Failed to create HAP task...\n");
             goto exit;
         }
@@ -427,7 +427,7 @@ int homekit_init()
 
     nvdm_read_data_item("common", "HOMEKIT_AUTO_START", homekit_auto_start, &homekit_auto_start_size);
     if (os_strcmp(homekit_auto_start, "1") == 0) {
-        if (xTaskCreate( homekit_task, "hmkit", 2 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, NULL) != pdPASS) {
+        if (xTaskCreate(homekit_task, "hmkit", 2 * 1024 / sizeof(portSTACK_TYPE), NULL, 1, NULL) != pdPASS) {
             printf("Failed to create HomeKit task...\n");
             return -1;
         }

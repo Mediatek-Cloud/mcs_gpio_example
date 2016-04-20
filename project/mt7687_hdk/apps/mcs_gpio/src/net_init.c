@@ -91,15 +91,24 @@ static int32_t cache_enable(hal_cache_size_t cache_size)
         hal_cache_region_config(region, &region_cfg_tbl[region]);
         hal_cache_region_enable(region);
     }
-    for ( ; region < HAL_CACHE_REGION_MAX; region++) {
+    for (; region < HAL_CACHE_REGION_MAX; region++) {
         hal_cache_region_disable(region);
     }
     hal_cache_enable();
     return 0;
 }
 
-static void prvSetupHardware( void )
+static void prvSetupHardware(void)
 {
+#if defined(MTK_HAL_LOWPOWER_ENABLE)
+    if (1 == hal_lp_get_wic_wakeup()) {
+        /* N9 MUST be active for clock switch and pinmux config*/
+        /* Wakeup N9 by connsys ownership */
+        connsys_open();
+        connsys_close();
+    }
+#endif
+
     if (cache_enable(HAL_CACHE_SIZE_32KB) < 0) {
         LOG_E(common, "cache enable failed");
     }
@@ -148,7 +157,7 @@ static void print_system(void)
     printf(" %8u\n", (unsigned int)connsys_get_stat_int_count());
 }
 
-static void prvInfoTask( void *pvParameters )
+static void prvInfoTask(void *pvParameters)
 {
     /* Loop */
     for (;;) {

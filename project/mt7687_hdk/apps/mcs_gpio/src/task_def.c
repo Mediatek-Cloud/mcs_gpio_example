@@ -52,7 +52,7 @@ typedef struct tasks_list_ {
  ****************************************************************************/
 
 #ifdef MTK_MINISUPP_ENABLE
-static void wpa_supplicant_task( void *pvParameters );
+static void wpa_supplicant_task(void *pvParameters);
 #endif
 
 /****************************************************************************
@@ -86,7 +86,7 @@ static TaskHandle_t     _task_handles[tasks_list_count];
  ****************************************************************************/
 
 #ifdef MTK_MINISUPP_ENABLE
-static void wpa_supplicant_task( void *pvParameters )
+static void wpa_supplicant_task(void *pvParameters)
 {
     uint8_t op_mode = 0;
 
@@ -108,14 +108,14 @@ static void wpa_supplicant_task( void *pvParameters )
     vTaskDelay(1000);
 
     wpa_supplicant_entry((unsigned char)op_mode);
-    vTaskDelete( NULL );
+    vTaskDelete(NULL);
 }
 #endif
 
 /****************************************************************************
  * Public API
  ****************************************************************************/
-extern size_t xPortGetFreeHeapSize( void );
+extern size_t xPortGetFreeHeapSize(void);
 
 void task_def_create(void)
 {

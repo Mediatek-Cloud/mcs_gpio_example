@@ -48,7 +48,7 @@ static uint32_t SysTick_Set(uint32_t ticks)
 /*----------------------------------------------------------------------------
   Clock functions
  *----------------------------------------------------------------------------*/
-void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
+void SystemCoreClockUpdate(void)             /* Get Core Clock Frequency      */
 {
     SystemCoreClock = top_mcu_freq_get();
 }
@@ -65,7 +65,7 @@ void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
  * @brief  Setup the microcontroller system.
  *         Initialize the System.
  */
-void SystemInit (void)
+void SystemInit(void)
 {
     SCB->VTOR  = NVIC_RAM_VECTOR_ADDRESS;
     SystemCoreClockUpdate();
@@ -136,7 +136,7 @@ void cmnPLL1ON(void)
     reg = cmnReadRegister32(pTopCfgCM4PWRCtl);
     reg = (reg >>  CM4_MPLL_EN_SHIFT) & CM4_MPLL_EN_MASK;
 
-    if ( reg == CM4_MPLL_EN_PLL1_OFF_PLL2_OFF) {
+    if (reg == CM4_MPLL_EN_PLL1_OFF_PLL2_OFF) {
         reg = cmnReadRegister32(pTopCfgCM4PWRCtl);
         reg = reg & ~(CM4_NEED_RESTORE_MASK <<  CM4_NEED_RESTORE_SHIFT);    // avoid W1C
         reg = reg | (CM4_MPLL_EN_PLL1_ON_PLL2_OFF << CM4_MPLL_EN_SHIFT);    // Or only, so PLL2 setting won't be cleared
@@ -158,7 +158,7 @@ void cmnPLL1ON_PLL2ON(uint8_t fg960M)
     reg = cmnReadRegister32(pTopCfgCM4PWRCtl);
     reg = (reg >>  CM4_MPLL_EN_SHIFT) & CM4_MPLL_EN_MASK;
 
-    if ( reg != CM4_MPLL_EN_PLL1_ON_PLL2_ON) {
+    if (reg != CM4_MPLL_EN_PLL1_ON_PLL2_ON) {
         reg = cmnReadRegister32(pTopCfgCM4PWRCtl);
         reg = reg & ~(CM4_MCU_960_EN_MASK << CM4_MCU_960_EN_SHIFT);
         reg = reg & ~(CM4_NEED_RESTORE_MASK <<  CM4_NEED_RESTORE_SHIFT);    // avoid W1C

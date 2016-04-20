@@ -9,8 +9,8 @@ extern "C" {
 #ifndef __HAP_TEST_H__
 #define __HAP_TEST_H__
 extern cmd_t hap_cli[];
-extern void hap_test( void *pvParameters );
-extern void hap_reset( void *pvParameters );
+extern void hap_test(void *pvParameters);
+extern void hap_reset(void *pvParameters);
 #endif
 
 #ifndef __WAC_TEST_H__

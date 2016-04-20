@@ -21,7 +21,7 @@ extern "C" {
 #define DEF_WIFI_ENCRYPT_TYPE   (5) //1: Ndis802_11EncryptionDisabled 5:Ndis802_11Encryption3Enabled
 #endif
 
-#define DEF_WIFI_WIRELESS_MODE  (9) //PHY_11BGN_MIXED,	// if check 802.11b.      9
+#define DEF_WIFI_WIRELESS_MODE  (9) //PHY_11BGN_MIXED,  // if check 802.11b.      9
 #define DEF_WIFI_CHANNEL        (1)
 
 #define DEF_WIFI_BSS_TYPE       (1) //BSS_INFRA

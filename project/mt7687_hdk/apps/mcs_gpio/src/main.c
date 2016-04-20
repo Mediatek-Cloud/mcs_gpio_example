@@ -14,6 +14,7 @@
 #include "ethernetif.h"
 #include "lwip/sockets.h"
 #include "netif/etharp.h"
+#include "smart_connection.h"
 #include "mcs.h"
 
 /* gpio */

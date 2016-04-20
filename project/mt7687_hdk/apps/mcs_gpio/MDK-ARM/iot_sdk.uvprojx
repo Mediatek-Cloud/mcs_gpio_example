@@ -12,16 +12,16 @@
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
         <TargetCommonOption>
-          <Device>MT7687</Device>
+          <Device>MT7687F</Device>
           <Vendor>MediaTek</Vendor>
           <PackID>MediaTek.MTx.3.1.0</PackID>
           <PackURL>http://download.labs.mediatek.com</PackURL>
-          <Cpu>IROM(0x10000000,0x00400000) IRAM(0x20000000,0x00040000) IRAM2(0x00100000,0x00010000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IROM(0x10000000,0x00200000) IRAM(0x20000000,0x00040000) IRAM2(0x00100000,0x00010000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF07687_32M_MXIC -FS010000000 -FL0400000 -FP0($$Device:MT7687$tools\keil\mt7687\7687_32M_MXIC.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF07687_32M_MXIC -FS010000000 -FL0200000 -FP0($$Device:MT7687F$tools\keil\mt7687\7687_32M_MXIC.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:MT7687$driver\CMSIS\Device\MTK\mt7687\Include\mt7687.h</RegisterFile>
+          <RegisterFile>$$Device:MT7687F$driver\CMSIS\Device\MTK\mt7687\Include\mt7687.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -149,7 +149,7 @@
             <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>1</TargetSelection>
+          <TargetSelection>12</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -163,7 +163,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver>BIN\UL2CM3.DLL</Driver>
+            <Driver>BIN\CMSIS_AGDI.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -177,8 +177,8 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
-          <Flash4></Flash4>
+          <Flash3>"" ()</Flash3>
+          <Flash4>..\..\..\..\..\tools\keil\mt7687\flash.ini</Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
           <pFcArmRoot></pFcArmRoot>
@@ -287,7 +287,7 @@
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x10000000</StartAddress>
-                <Size>0x400000</Size>
+                <Size>0x200000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -312,7 +312,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x10000000</StartAddress>
-                <Size>0x400000</Size>
+                <Size>0x200000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -367,7 +367,7 @@
             <v6LangP>0</v6LangP>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>PCFG_OS=2 _REENT_SMALL MTK_SYS_TRNG_ENABLE MTK_NVRAM_ENABLE MTK_WIFI_API_TEST_CLI_ENABLE MTK_MINISUPP_ENABLE MTK_MINICLI_ENABLE MTK_BSP_INBAND_NEW_ENABLE MTK_BSP_LOAD_WIFI_PROFILE_ENABLE MTK_BSPEXT_ENABLE  MTK_TFTP_ENABLE MTK_HAL_LOWPOWER_ENABLE MTK_LWIP_ENABLE MTK_IPERF_ENABLE PRODUCT_VERSION=7687 MTK_WIFI_TGN_VERIFY_ENABLE MTK_SMTCN_ENABLE MTK_WIFI_WPS_ENABLE MTK_CLI_TEST_MODE_ENABLE MTK_WIFI_REPEATER_ENABLE N9_DUAL_INF_READY CONFIG_DUAL_INTERFACE</Define>
+              <Define>PCFG_OS=2 _REENT_SMALL MTK_SYS_TRNG_ENABLE MTK_NVRAM_ENABLE MTK_WIFI_API_TEST_CLI_ENABLE MTK_MINISUPP_ENABLE MTK_MINICLI_ENABLE MTK_BSP_INBAND_NEW_ENABLE MTK_BSP_LOAD_WIFI_PROFILE_ENABLE MTK_BSPEXT_ENABLE  MTK_TFTP_ENABLE MTK_HAL_LOWPOWER_ENABLE MTK_LWIP_ENABLE MTK_IPERF_ENABLE PRODUCT_VERSION=7687 MTK_WIFI_TGN_VERIFY_ENABLE MTK_SMTCN_ENABLE MTK_WIFI_WPS_ENABLE MTK_CLI_TEST_MODE_ENABLE MTK_WIFI_REPEATER_ENABLE N9_DUAL_INF_READY CONFIG_DUAL_INTERFACE MTK_DEBUG_LEVEL_INFO MTK_DEBUG_LEVEL_WARNING MTK_DEBUG_LEVEL_ERROR</Define>
               <Undefine></Undefine>
               <IncludePath>..\inc;..\..\..\..\..\kernel\rtos\FreeRTOS\Source\include;..\..\..\..\..\kernel\rtos\FreeRTOS\Source\portable\RVDS\ARM_CM4F;..\..\..\..\..\kernel\rtos\FreeRTOS\inc;..\..\..\..\..\driver\CMSIS\Device\MTK\mt7687\Include;..\..\..\..\..\driver\CMSIS\Include;..\..\..\..\..\project\mt7687_hdk\test_cases\sys_init_test\inc;..\..\..\..\..\kernel\service\inc;..\..\..\..\..\middleware\third_party\lwip\src\include;..\..\..\..\..\middleware\third_party\lwip\ports\include;..\..\..\..\..\driver\chip\inc;..\..\..\..\..\driver\chip\mt7687\inc;..\..\..\..\..\driver\board\mt76x7_hdk\wifi\inc;..\..\..\..\..\middleware\third_party\dhcpd\inc;..\..\..\..\..\middleware\MTK\minicli\inc;..\..\..\..\..\middleware\MTK\minisupp\inc;..\..\..\..\..\driver\chip\inc;..\..\..\..\..\driver\chip\mt7687\src\common\include;..\..\..\..\..\middleware\third_party\lwip\src\include;..\..\..\..\..\middleware\third_party\lwip\ports\include;..\..\..\..\..\middleware\third_party\lwip\src\include\lwip;..\..\..\..\..\project\common\bsp_ex\inc;..\..\..\..\..\middleware\MTK\nvdm\inc;..\..\..\..\..\middleware\MTK\nvram\inc;..\..\..\..\..\middleware\MTK\nvdm\src\portable;..\..\..\..\..\middleware\third_party\ping\inc;..\..\..\..\..\middleware\MTK\smtcn\inc;..\..\..\..\..\middleware\MTK\iperf\inc;..\..\..\..\..\project\mt7687_hdk\apps\iot_sdk\inc;..\..\..\..\..\driver\chip\mt7687\inc;..\..\..\..\..\driver\board\mt76x7_hdk\init\inc;..\..\..\..\..\driver\board\mt76x7_hdk\inc</IncludePath>
             </VariousControls>
